@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>pages 41, 47 et 62-Création de paragraphes, objets SVG à partir des données</title>
+		<script type="text/javascript" src="d3.v3.js"></script>
+	</head>
+	<body>
+	<script type="text/javascript">
+	//D3 facilite grandement l'ajout de balise non présente à l'origine dans le code HTML
+
+	var body=d3.select("body");
+	var tab=[10,8,25,15,30];
+	var body=d3.select("body");
+	body.selectAll("p")
+    .data(tab)
+    //data(tab) permet d'utiliser les données présentes dans le tableau tab
+	//enter() permet de générer autant de balises qu'il y a de données dans le tableau tab
+    .enter()
+    .append("p")
+    .text(function(d,i){
+        return ("La valeur n°"+i+" du tableau est : "+d)
+    });
+
+    var svg=body.append("svg");
+	svg.attr({"width":"800px","height":"600px"})
+	svg.style("border","1px solid black");
+	svg.selectAll("rect")
+    .data(tab)
+    .enter()
+    .append("rect")
+    .attr({"height":"30px","x":"200px","fill":"blue","stroke":"red"})
+    .attr("width",function(d,i){
+        return d*10
+    })
+    .attr("y",function(d,i){
+        return (100+i*34)
+    });
+    var tab=[[5,3],[15,4],[3,10],[8,5],[20,8]]
+	var body=d3.select("body");
+	var svg=body.append("svg");
+	svg.attr({"width":"400px","height":"400px"})
+	svg.style("border","1px solid black");
+	svg.selectAll("circle")
+    .data(tab)
+    .enter()
+    .append("circle")
+    .attr({"r":"3px","fill":"black","stroke":"black"})
+    .attr("cx",function(d,i){
+        return (d[0]*8);
+    })
+    .attr("cy",function(d,i){
+        return (d[1]*8);
+    });
+	</script>
+	</body>
+</html>

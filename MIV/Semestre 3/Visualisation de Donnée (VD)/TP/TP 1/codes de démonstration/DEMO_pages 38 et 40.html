@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Démo pages 38 et 40</title>
+		<script type="text/javascript" src="d3.v4.min.js"></script>
+	</head>
+	<body>
+	<script type="text/javascript">
+	var newRamp = d3.scaleLinear().domain([5000,13000]).range([0, 50]);
+	console.log(newRamp(6000));
+	console.log(newRamp(9000));
+	console.log(newRamp.invert(31.3));
+	text = "alpha,beta,gamma";
+	console.log(text); 
+	const tab=text.split(",");
+	console.log(tab);  // string to array
+
+	var testArray =  [88, 10000, 1, 75, 12, 35];
+	vmin=d3.min(testArray, el => el);
+	vmax=d3.max(testArray, el => el);
+	vmean=d3.mean(testArray, el => el);
+	console.log(vmin, vmax, vmean);
+
+	d3.csv("cities.csv", data => {
+	csv_min=d3.min(data, el => +el.population);
+	// d3.min(data, function(d) { return d; })
+	csv_max=d3.max(data, el => +el.population);
+	csv_mean=d3.mean(data, el => +el.population);
+	csv_ext=d3.extent(data, el => +el.population);
+	console.log(csv_min, csv_max, csv_mean, csv_ext);
+});
+
+	d3.csv("cities.csv", (error,data) => {
+   if (error) {   console.error(error)   }
+   else {   dataViz(data)   }
+   });
+	function dataViz(incomingData) {
+  	d3.select("body").selectAll("div.cities")
+    .data(incomingData)
+    .enter()
+    .append("div")
+    .attr("class","cities")
+    .html(d => d.label);
+}
+
+</script>
+	</body>
+</html>

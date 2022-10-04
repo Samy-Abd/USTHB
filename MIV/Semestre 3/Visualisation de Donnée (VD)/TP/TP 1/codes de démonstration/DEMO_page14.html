@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>page 14-Création d'éléments html</title>
+		<script type="text/javascript" src="d3.v3.js"></script>
+	</head>
+	<body>
+	<script type="text/javascript">
+	//D3 facilite grandement l'ajout de balise non présente à l'origine dans le code HTML
+
+	var body=d3.select("body");
+	var p=body.append("p");
+	p.text("Un paragraphe généré par D3 !");
+	body.append("a")
+    .attr("href","https://d3js.org/")
+    .text("Ceci est un lien, cliquez ici");
+    body.append("h1")
+    .style("color","red")
+    .text("Voici un titre en rouge");
+    var svg=body.append("svg");
+	svg.attr({"width":"200px","height":"100px"})
+	svg.style("border","1px solid black");
+
+	//d3.select("body").append("p").text("Un paragraphe généré par D3 !");
+	function MaFonction (f){
+    	f();
+    }
+	MaFonction(function(){alert("Cela fonctionne")});
+	var body=d3.select("body");
+	body.append("p")
+    .style("color",function(){
+        var couleur=prompt("choisissez une couleur 1-rouge 2-bleue (tapez 1 ou 2)");
+        if (couleur=="1"){
+            return "red";
+        }
+        else if (couleur=="2"){
+            return "blue";
+        }
+        else{
+            return "black";
+        }
+      })
+    .text("Cela fonctionne");
+	</script>
+	</body>
+</html>
